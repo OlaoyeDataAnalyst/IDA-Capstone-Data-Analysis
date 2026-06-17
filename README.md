@@ -1,37 +1,38 @@
-# 🏥 Project 2 — Hospital Patient Flow & Resource Analysis
+# 💰 Project 5 — Personal Finance & Budget Analysis
 
 ## 🏢 Business Background
-Lagos General Hospital is a busy tertiary care facility serving patients from across Lagos and neighbouring states. Hospital management raised concerns about long patient waiting times, high readmission rates, and revenue collection gaps. This analysis was commissioned to understand patient flow patterns, identify high-demand periods, and generate insights to guide resource allocation, staffing improvements, and billing efficiency.
+FinTrack is a Nigerian fintech startup building a personal finance application. Before launch, the product team commissioned an analysis of three years of synthetic transaction data from 5,000 test users to understand spending patterns, savings behaviour, and budgetary pressures. The findings inform in-app budget recommendations, alert features, and marketing segmentation strategies.
 
 ---
 
 ## 📁 Project Structure
 ```
-Project2_Hospital/
-├── Project2_Hospital_Patient_Flow_EDA.ipynb  # Python EDA with 10 clinical visualizations
-├── Project2_Hospital_SQL.sql                 # 11 SQL queries including CTEs & window functions
-├── Project2_Hospital_Excel.xlsx              # Pivot tables, collection rate analysis & KPI sheet
-├── Project2_Hospital_Dashboard.pdf           # Power BI dashboard with drill-through
-└── Project2_Hospital_Summary.docx            # Written findings & operational recommendations
+Project5_FinTrack/
+├── Project5_Personal_Finance_EDA.ipynb      # Python EDA with 10 financial visualizations
+├── Project5_Personal_Finance_SQL.sql        # 11 SQL queries including cumulative window functions
+├── Project5_Personal_Finance_Excel.xlsx     # Pivot tables, 50/30/20 budget model & KPI sheet
+├── Project5_Personal_Finance_Dashboard.pdf  # Power BI dashboard with DAX savings rate measure
+└── Project5_FinTrack_Summary.docx           # Written findings & product recommendations
 ```
 
 ---
 
 ## 🎯 Objectives
-- Analyse healthcare operational data to identify inefficiencies
-- Calculate clinical KPIs including readmission rate and collection rate
-- Use SQL to query complex multi-condition patient records
-- Build an operational dashboard with drill-through for hospital management
-- Identify actionable insights for resource allocation and billing improvement
+- Aggregate and analyse financial transaction data across users and time
+- Build a multi-user SQL financial database with meaningful queries
+- Create a personal budget model in Excel using the 50/30/20 rule
+- Design a consumer-facing finance dashboard in Power BI
+- Identify actionable product insights for the FinTrack app team
 
 ---
 
 ## 📊 Dataset
 - **Source:** IDA/3MTT Data Analysis Bootcamp (educational purposes)
-- **Records:** 59,950 patient records after cleaning
+- **Records:** 74,922 transactions after cleaning
+- **Users:** 5,000 unique users
 - **Period:** January 2021 — December 2023
-- **Columns:** 17 (patient demographics, admission details, outcomes, billing data)
-- **Data Quality:** 12,122 missing insurance_type values filled with 'Unknown'
+- **Columns:** 14 (transaction details, categories, payment methods, banking data)
+- **Data Quality:** 24,994 missing savings_goal_met filled with 'N/A'; 21,618 missing notes filled with 'Unknown'
 - **Note:** Raw dataset not included in this repository
 
 ---
@@ -39,70 +40,80 @@ Project2_Hospital/
 ## 🛠️ Tools & Techniques Used
 | Tool | Purpose | Techniques Applied |
 |------|---------|-------------------|
-| Python (Pandas, Matplotlib, Seaborn) | Data cleaning & clinical EDA | Bill gap analysis, heatmaps, box plots, scatter plots |
-| MySQL | Patient flow queries | CTEs, RANK(), year-over-year comparison, CASE WHEN |
-| Microsoft Excel | Pivot tables & reporting | Collection rate formulas, conditional formatting |
-| Power BI | Operational dashboard | Drill-through pages, DAX measures, 4 slicers |
+| Python (Pandas, Matplotlib, Seaborn) | Data cleaning & financial EDA | Income/expense separation, over-spender flagging, income bracket analysis |
+| MySQL | Financial queries | Cumulative SUM() OVER, NTILE(), CTEs, CASE WHEN |
+| Microsoft Excel | Budget model & reporting | 50/30/20 dynamic model, SUMIFS, conditional formatting |
+| Power BI | Consumer dashboard | DAX Savings Rate measure, 5 slicers, slicer-responsive measures |
 
 ---
 
 ## 🔍 Key Findings
 
-**1. Pediatrics is the Most Burdened Department**
-Pediatrics recorded the highest admissions (7,641), highest readmission rate, and second-highest mortality rate. Paradoxically it also has the lowest average bill — indicating critical underpricing of pediatric services relative to resource consumption.
+**1. 99.6% of Users Overspend**
+4,982 out of 5,000 users overspent in more than 3 months across the analysis period. The average user overspent in 10.1 out of 36 months — struggling financially for nearly one-third of the year. This strongly validates FinTrack's core product concept.
 
-**2. ₦6 Billion Revenue Collection Gap**
-Total uncollected revenue across 2021–2023 was ₦6,074,943,600. All insurance types show a consistent ~75% collection rate, confirming this is a systemic hospital-wide problem rather than insurance-type specific.
+**2. Overall Savings Rate is 16.80%**
+Total income of ₦4,399,924,700 against total expenses of ₦3,660,710,070 yields a net savings of ₦739,214,630. The savings rate falls below the recommended 20% threshold.
 
-**3. Dual Peak Admission Periods**
-Friday at 17:00 (5PM) and Saturday at 01:00 (1AM) both recorded 401 admissions — the highest in the dataset. These represent post-work healthcare seeking and late-night weekend emergencies respectively.
+**3. 1,655 Users Have Never Saved**
+33.1% of users have never recorded a single savings transaction despite actively spending. These are FinTrack's highest priority users for automated savings nudges and goal-setting features.
 
-**4. 45% of Patients Stay Longer Than 14 Days**
-27,032 patients (45% of all admissions) stayed beyond 14 days, indicating high resource consumption and bed occupancy. Pediatrics and Neurology lead in long-stay patients.
+**4. Low Income Users Struggle Most**
+Users earning below ₦1M monthly show negative average savings — consistently spending more than they earn. Only users above ₦2M monthly income show meaningfully positive savings behaviour.
 
-**5. COVID-19 is the Leading Diagnosis**
-COVID-19 accounted for 6.37% of all admissions reflecting the significant impact of the pandemic on hospital operations during the 2021–2023 period.
+**5. August is Peak Spending Month**
+August recorded the highest total spending for both Savings (₦32.0M) and Entertainment (₦30.9M). It is also the only month where collective expenses exceeded income (-₦3,031,360 net savings in August 2023).
 
-**6. Ward 16 Chronically Overloaded**
-Ward 16 appeared in the top 5 busiest wards across all three years. Ward 20 also consistently ranked 2nd and 3rd — both require permanent additional capacity.
+**6. All 8 Banks Equally Popular**
+GTBank leads narrowly in transaction volume at 12.66% but all banks share transactions almost equally at ~12.5% each. FinTrack should integrate all 8 banks equally.
 
 ---
 
 ## 📈 KPI Summary
 | Metric | Value |
 |--------|-------|
-| Total Admissions | 59,950 |
-| Average Length of Stay | ~15 days |
-| Overall Readmission Rate | ~20% |
-| Collection Rate | ~74.9% |
-| Total Bill Gap | ₦6,074,943,600 |
-| Busiest Department | Pediatrics (7,641 admissions) |
-| Top Diagnosis | COVID-19 (6.37%) |
-| Peak Admission Hour | 17:00 (5PM — Friday) |
-| Highest Mortality Dept | Oncology |
-| Most Overloaded Ward | Ward 16 |
+| Total Income | ₦4,399,924,700 |
+| Total Expenses | ₦3,660,710,070 |
+| Net Savings | ₦739,214,630 |
+| Overall Savings Rate | 16.80% |
+| Total Users | 5,000 |
+| Over-spenders (>3 months) | 4,982 (99.6%) |
+| Users Who Never Saved | 1,655 (33.1%) |
+| Users with Savings Rate >20% | 2,245 (44.9%) |
+| Top Spending Category | Savings (8.9%) |
+| Most Used Bank | GTBank (12.66%) |
+| Peak Income Month | December |
+| Peak Spending Month | August |
 
 ---
 
 ## 💡 Recommendations
-1. **Urgently investigate Pediatrics** mortality and readmission rates, particularly the 2022 mortality spike from 3.0% to 3.74%
-2. **Implement hospital-wide payment enforcement** to address the systemic 25% collection gap across all insurance types
-3. **Deploy maximum staffing** on Friday evenings and Saturday overnight shifts to manage dual peak admission periods
-4. **Expand capacity in Ward 16 and Ward 20** through additional beds, equipment, and dedicated nursing staff
-5. **Review and increase Pediatric billing rates** to reflect actual resource consumption
-6. **Improve insurance data collection** at admission to reduce the 20% Unknown insurance category
+1. **Make budget alerts core features** — not optional — given 99.6% of users overspend in some months
+2. **Implement automated savings nudges** for the 1,655 users who have never saved, starting with low-commitment options like transaction round-ups
+3. **Send proactive budget reminders in July** to prepare users for the August spending surge
+4. **Offer simplified budget templates** for users earning below ₦1M monthly — this segment needs the most structural financial support
+5. **Integrate all 8 banks equally** to serve the diverse banking preferences of the user base
+6. **Introduce savings milestones and badges** to celebrate and reinforce positive savings behaviour among the 44.9% already saving above 20%
+
+---
+
+## 🧮 50/30/20 Budget Model
+A dynamic Excel budget model was built that automatically calculates recommended category budgets when a monthly income amount is entered:
+- **50% Needs** — Rent, Food, Utilities, Transport, Healthcare
+- **30% Wants** — Entertainment, Clothing, Airtime/Data, Miscellaneous
+- **20% Savings** — Savings deposits and Investments
 
 ---
 
 ## 📸 Dashboard Preview
-*See **Project2_Hospital_Dashboard.pdf** for the full Power BI dashboard featuring:*
-- 4 KPI Cards (Total Admissions, Avg Length of Stay, Readmission Rate, Collection Rate)
-- Bar Chart: Admissions by Department
-- Line Chart: Monthly Admissions Trend 2021–2023
-- Donut Chart: Insurance Type Distribution
-- Table: Revenue Billed vs Collected by Insurance Type
-- Drill-through Page: Department-level patient detail view
-- Slicers: Year, Department, Outcome, Insurance Type
+*See **Project5_Personal_Finance_Dashboard.pdf** for the full Power BI dashboard featuring:*
+- 4 KPI Cards (Total Income, Total Expenses, Net Savings, Savings Rate %)
+- Donut Chart: Spending by Category
+- Line Chart: Monthly Income vs Expense Trend
+- Bar Chart: Top 10 Spending Categories
+- Table: User-Level Income, Expenses & Savings Rate
+- DAX Measure: Savings Rate fully responsive to all 5 slicers
+- Slicers: Year, Month, Transaction Type, Category, Bank
 
 ---
 
