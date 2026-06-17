@@ -1,36 +1,37 @@
-# 📊 Project 1 — Retail Sales Performance Analysis
+# 🏥 Project 2 — Hospital Patient Flow & Resource Analysis
 
 ## 🏢 Business Background
-ShopEase Nigeria is a mid-sized retail company operating across 8 major cities in Nigeria, selling products across 8 categories through both physical stores and an online platform. Management noticed that while overall revenue had grown, some regions and product categories were consistently underperforming. This analysis investigates sales trends, customer behaviour, and produces a comprehensive performance dashboard to guide strategic decisions.
+Lagos General Hospital is a busy tertiary care facility serving patients from across Lagos and neighbouring states. Hospital management raised concerns about long patient waiting times, high readmission rates, and revenue collection gaps. This analysis was commissioned to understand patient flow patterns, identify high-demand periods, and generate insights to guide resource allocation, staffing improvements, and billing efficiency.
 
 ---
 
 ## 📁 Project Structure
 ```
-Project1_ShopEase/
-├── Project1_Retail_Sales_EDA.ipynb      # Python EDA notebook with 6+ visualizations
-├── Project1_Retail_Sales_SQL.sql        # 11 SQL queries including window functions & CTEs
-├── Project1_Retail_Sales_Excel.xlsx     # Pivot tables, charts & KPI summary sheet
-├── Project1_Retail_Sales_Dashboard.pdf  # Power BI interactive dashboard export
-└── Project1_ShopEase_Summary.docx       # Written findings & recommendations report
+Project2_Hospital/
+├── Project2_Hospital_Patient_Flow_EDA.ipynb  # Python EDA with 10 clinical visualizations
+├── Project2_Hospital_SQL.sql                 # 11 SQL queries including CTEs & window functions
+├── Project2_Hospital_Excel.xlsx              # Pivot tables, collection rate analysis & KPI sheet
+├── Project2_Hospital_Dashboard.pdf           # Power BI dashboard with drill-through
+└── Project2_Hospital_Summary.docx            # Written findings & operational recommendations
 ```
 
 ---
 
 ## 🎯 Objectives
-- Perform end-to-end data cleaning and exploratory analysis in Python
-- Write SQL queries to answer business KPI questions
-- Build pivot table summaries and trend charts in Excel
-- Design an interactive sales dashboard in Power BI
-- Identify actionable insights from sales patterns
+- Analyse healthcare operational data to identify inefficiencies
+- Calculate clinical KPIs including readmission rate and collection rate
+- Use SQL to query complex multi-condition patient records
+- Build an operational dashboard with drill-through for hospital management
+- Identify actionable insights for resource allocation and billing improvement
 
 ---
 
 ## 📊 Dataset
 - **Source:** IDA/3MTT Data Analysis Bootcamp (educational purposes)
-- **Records:** 79,931 orders after cleaning
+- **Records:** 59,950 patient records after cleaning
 - **Period:** January 2021 — December 2023
-- **Columns:** 17 (order details, product info, revenue, customer & salesperson data)
+- **Columns:** 17 (patient demographics, admission details, outcomes, billing data)
+- **Data Quality:** 12,122 missing insurance_type values filled with 'Unknown'
 - **Note:** Raw dataset not included in this repository
 
 ---
@@ -38,70 +39,70 @@ Project1_ShopEase/
 ## 🛠️ Tools & Techniques Used
 | Tool | Purpose | Techniques Applied |
 |------|---------|-------------------|
-| Python (Pandas, Matplotlib, Seaborn) | Data cleaning & EDA | Feature engineering, correlation analysis, heatmaps |
-| MySQL | Business queries | Window functions (LAG, RANK), CTEs, GROUP BY |
-| Microsoft Excel | Pivot tables & reporting | SUMIF, COUNTIF, conditional formatting |
-| Power BI | Interactive dashboard | DAX measures, slicers, page-level filters |
+| Python (Pandas, Matplotlib, Seaborn) | Data cleaning & clinical EDA | Bill gap analysis, heatmaps, box plots, scatter plots |
+| MySQL | Patient flow queries | CTEs, RANK(), year-over-year comparison, CASE WHEN |
+| Microsoft Excel | Pivot tables & reporting | Collection rate formulas, conditional formatting |
+| Power BI | Operational dashboard | Drill-through pages, DAX measures, 4 slicers |
 
 ---
 
 ## 🔍 Key Findings
 
-**1. Lagos Leads in Total Revenue**
-Lagos recorded the highest total revenue across all 8 regions, reflecting its status as Nigeria's commercial capital with the highest population and purchasing power.
+**1. Pediatrics is the Most Burdened Department**
+Pediatrics recorded the highest admissions (7,641), highest readmission rate, and second-highest mortality rate. Paradoxically it also has the lowest average bill — indicating critical underpricing of pediatric services relative to resource consumption.
 
-**2. Electronics Dominates Revenue**
-Electronics contributed the highest percentage of total revenue while Food & Beverages contributed the least — suggesting limited competitiveness in that segment.
+**2. ₦6 Billion Revenue Collection Gap**
+Total uncollected revenue across 2021–2023 was ₦6,074,943,600. All insurance types show a consistent ~75% collection rate, confirming this is a systemic hospital-wide problem rather than insurance-type specific.
 
-**3. Smartphones are the Top Product**
-Smartphones ranked #1 by net revenue and appeared in the top 3 products by revenue per unit sold, confirming high-value electronics as the primary revenue driver.
+**3. Dual Peak Admission Periods**
+Friday at 17:00 (5PM) and Saturday at 01:00 (1AM) both recorded 401 admissions — the highest in the dataset. These represent post-work healthcare seeking and late-night weekend emergencies respectively.
 
-**4. Near-Zero Repeat Purchase Rate**
-The maximum number of orders placed by any single customer was just 2, with only 2 customers achieving this. ShopEase is almost entirely dependent on new customer acquisition.
+**4. 45% of Patients Stay Longer Than 14 Days**
+27,032 patients (45% of all admissions) stayed beyond 14 days, indicating high resource consumption and bed occupancy. Pediatrics and Neurology lead in long-stay patients.
 
-**5. Clothing Has the Highest Return Rate**
-Clothing recorded the highest return rate among all categories, likely due to sizing mismatches and product expectation gaps from online descriptions.
+**5. COVID-19 is the Leading Diagnosis**
+COVID-19 accounted for 6.37% of all admissions reflecting the significant impact of the pandemic on hospital operations during the 2021–2023 period.
 
-**6. Delivery Time Does Not Drive Returns**
-Pearson correlation between delivery days and return rate was only 0.064 — an extremely weak relationship, meaning logistics speed is not the primary cause of returns.
+**6. Ward 16 Chronically Overloaded**
+Ward 16 appeared in the top 5 busiest wards across all three years. Ward 20 also consistently ranked 2nd and 3rd — both require permanent additional capacity.
 
 ---
 
 ## 📈 KPI Summary
 | Metric | Value |
 |--------|-------|
-| Total Net Revenue | ₦15,971,958,650 |
-| Total Orders | 79,931 |
-| Average Order Value | ₦199,821.83 |
-| Overall Return Rate | 8.06% |
-| Top Region | Lagos |
-| Top Category | Electronics |
-| Top Product | Smartphone |
-| Top Salesperson | SP-049 |
-| Number of Regions | 8 |
-| Number of Categories | 8 |
-| Number of Salespersons | 50 |
+| Total Admissions | 59,950 |
+| Average Length of Stay | ~15 days |
+| Overall Readmission Rate | ~20% |
+| Collection Rate | ~74.9% |
+| Total Bill Gap | ₦6,074,943,600 |
+| Busiest Department | Pediatrics (7,641 admissions) |
+| Top Diagnosis | COVID-19 (6.37%) |
+| Peak Admission Hour | 17:00 (5PM — Friday) |
+| Highest Mortality Dept | Oncology |
+| Most Overloaded Ward | Ward 16 |
 
 ---
 
 ## 💡 Recommendations
-1. **Launch a customer loyalty programme** immediately to address the critically low repeat purchase rate and reduce dependence on new customer acquisition
-2. **Improve Clothing category** quality control, size guides, and product descriptions to reduce the high return rate
-3. **Prioritise POS infrastructure** reliability as the most used payment channel — any downtime significantly impacts sales
-4. **Explore growth in underperforming regions** by replicating Lagos and Port Harcourt success strategies
-5. **Review Food & Beverages strategy** — consider scaling down or differentiating from local market competition
-6. **Implement salesperson incentive structure** based on RANK() analysis to motivate mid and low performers
+1. **Urgently investigate Pediatrics** mortality and readmission rates, particularly the 2022 mortality spike from 3.0% to 3.74%
+2. **Implement hospital-wide payment enforcement** to address the systemic 25% collection gap across all insurance types
+3. **Deploy maximum staffing** on Friday evenings and Saturday overnight shifts to manage dual peak admission periods
+4. **Expand capacity in Ward 16 and Ward 20** through additional beds, equipment, and dedicated nursing staff
+5. **Review and increase Pediatric billing rates** to reflect actual resource consumption
+6. **Improve insurance data collection** at admission to reduce the 20% Unknown insurance category
 
 ---
 
 ## 📸 Dashboard Preview
-*See **Project1_Retail_Sales_Dashboard.pdf** for the full Power BI dashboard featuring:*
-- 4 KPI Cards (Total Revenue, Total Orders, AOV, Return Rate)
-- Bar Chart: Revenue by Region
-- Donut Chart: Revenue by Category
-- Line Chart: Monthly Revenue Trend 2021–2023
-- Matrix: Region × Category Revenue Breakdown
-- Slicers: Year, Region, Category, Payment Method
+*See **Project2_Hospital_Dashboard.pdf** for the full Power BI dashboard featuring:*
+- 4 KPI Cards (Total Admissions, Avg Length of Stay, Readmission Rate, Collection Rate)
+- Bar Chart: Admissions by Department
+- Line Chart: Monthly Admissions Trend 2021–2023
+- Donut Chart: Insurance Type Distribution
+- Table: Revenue Billed vs Collected by Insurance Type
+- Drill-through Page: Department-level patient detail view
+- Slicers: Year, Department, Outcome, Insurance Type
 
 ---
 
